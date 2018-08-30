@@ -2,6 +2,9 @@ databaseChangeLog:
   - preConditions:
     - dbms:
         type: oracle
+    - or:
+        runningAs:
+          username: wqp_core
 
   - changeSet:
       author: abriggs
@@ -15,6 +18,6 @@ databaseChangeLog:
 
       changes:
       - sqlFile:
-          path: projectMLWeighting.sql
+          path: storetwTransition.sql
           relativeToChangelogFile: true
       - rollback: drop table act_metric_swap_storet cascade constraints purge;
