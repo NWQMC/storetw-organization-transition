@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - preConditions:
+    - dbms:
+        type: oracle
+
+  - changeSet:
+      author: abriggs
+      id: "create.table.storetw_transition"
+      preConditions:
+      - onFail: MARK_RAN
+      - onError: HALT
+      - not:
+        - tableExists:
+            tableName: storetw_transition
+
+      changes:
+      - sqlFile:
+          path: projectMLWeighting.sql
+          relativeToChangelogFile: true
+      - rollback: drop table act_metric_swap_storet cascade constraints purge;
