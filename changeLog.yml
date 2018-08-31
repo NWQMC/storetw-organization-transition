@@ -20,4 +20,4 @@ databaseChangeLog:
       - sqlFile:
           path: storetwTransition.sql
           relativeToChangelogFile: true
-      - rollback: drop table act_metric_swap_storet cascade constraints purge;
+      - rollback: drop table storetw_transition cascade constraints purge;
