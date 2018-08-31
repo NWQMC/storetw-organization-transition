@@ -2,8 +2,7 @@ databaseChangeLog:
   - preConditions:
     - dbms:
         type: oracle
-    - or:
-        runningAs:
+    - runningAs:
           username: wqp_core
 
   - changeSet:
@@ -16,7 +15,6 @@ databaseChangeLog:
       - not:
         - tableExists:
             tableName: storetw_transition
-
       changes:
       - sqlFile:
           path: storetwTransition.sql
@@ -36,4 +34,4 @@ databaseChangeLog:
             relativeToChangelogFile: true
             separator: \t
             tableName: storetw_transition
-        - rollback: select 'no rollback - you must restore previous data_source.tsv and rerun manually' from dual   
+        - rollback: select 'no rollback - you must restore previous data_source.tsv and rerun manually' from dual
