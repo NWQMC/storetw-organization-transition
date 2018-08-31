@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - preConditions:
+    - dbms:
+        type: oracle
+    - runningAs:
+        username: wqp_core
+
+  - changeSet:
+      author: abriggs
+      id: "create.table.storetw_transition"
+      runOnChange: true
+      preConditions:
+      - onFail: MARK_RAN
+      - onError: HALT
+      - not:
+        - tableExists:
+            tableName: storetw_transition
+      changes:
+      - sqlFile:
+          path: storetwTransition.sql
+          relativeToChangelogFile: true
+      - rollback: drop table storetw_transition cascade constraints purge;
+
+  - changeSet:
+      author: abriggs
+      id: "load.storetw_transition"
+      runOnChange: true
+      changes:
+        - delete:
+            tableName: storetw_transition
+        - loadData:
+            encoding: UTF-8
+            file: storetwTransitionOrgIdList.tsv
+            relativeToChangelogFile: true
+            separator: \t
+            tableName: storetw_transition
+        - rollback: select 'no rollback - you must restore previous data_source.tsv and rerun manually' from dual
