@@ -1,3 +1,3 @@
  create table storetw_transition
- (org_ID varchar(255)
+ (org_id varchar(255)
  , date_added date);

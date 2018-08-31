@@ -3,7 +3,7 @@ databaseChangeLog:
     - dbms:
         type: oracle
     - runningAs:
-          username: wqp_core
+        username: wqp_core
 
   - changeSet:
       author: abriggs
