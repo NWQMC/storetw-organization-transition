@@ -1,25 +1,24 @@
 databaseChangeLog:
   - preConditions:
     - dbms:
-        type: oracle
-    - runningAs:
-        username: wqp_core
+        type: postgresql
 
   - changeSet:
       author: abriggs
-      id: "create.table.storetw_transition"
+      id: "create.table.${STORETW_SCHEMA_NAME}.storetw_transition"
       runOnChange: true
       preConditions:
       - onFail: MARK_RAN
       - onError: HALT
       - not:
         - tableExists:
+            schemaName: ${STORETW_SCHEMA_NAME}
             tableName: storetw_transition
       changes:
       - sqlFile:
           path: storetwTransition.sql
           relativeToChangelogFile: true
-      - rollback: drop table storetw_transition cascade constraints purge;
+      - rollback: drop table if exists ${STORETW_SCHEMA_NAME}.storetw_transition cascade;
 
   - changeSet:
       author: abriggs
@@ -27,11 +26,13 @@ databaseChangeLog:
       runOnChange: true
       changes:
         - delete:
+            schemaName: ${STORETW_SCHEMA_NAME}
             tableName: storetw_transition
         - loadData:
             encoding: UTF-8
             file: storetwTransitionOrgIdList.tsv
             relativeToChangelogFile: true
             separator: \t
+            schemaName: ${STORETW_SCHEMA_NAME}
             tableName: storetw_transition
         - rollback: select 'no rollback - you must restore previous data_source.tsv and rerun manually' from dual
