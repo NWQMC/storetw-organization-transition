@@ -26,7 +26,7 @@ pipeline {
             extensions: [],
             submoduleCfg: [],
             userRemoteConfigs: [[credentialsId: 'CIDA-Jenkins-GitHub',
-            url: 'https://github.com/NWQMC/schema-ars-stewards.git']]])
+            url: 'https://github.com/NWQMC/storetw-organization-transition.git']]])
       }
     }
     stage('Download liquibase jar') {
