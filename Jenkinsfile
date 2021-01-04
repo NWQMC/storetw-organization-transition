@@ -77,7 +77,7 @@ pipeline {
           sh '''
             export CONTEXTS=$CONTEXTS
             export LIQUIBASE_HOME=$WORKSPACE/epa
-            export LIQUIBASE_WORKSPACE_EPA=$WORKSPACE/liquibase/changeLogs
+            export LIQUIBASE_WORKSPACE_EPA=$WORKSPACE/changeLogs
 
             chmod +x $WORKSPACE/scripts/z1_epa_liquibase.sh
             $WORKSPACE/scripts/z1_epa_liquibase.sh
