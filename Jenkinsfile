@@ -33,7 +33,7 @@ pipeline {
       steps {
         sh '''mkdir $WORKSPACE/epa
           /usr/local/bin/aws s3 cp s3://owi-common-resources/resources/InstallFiles/liquibase/liquibase-$LIQUIBASE_VERSION.tar.gz $WORKSPACE/epa/liquibase.tar.gz
-          /usr/bin/tar xzf $WORKSPACE/wqp_core/liquibase.tar.gz --overwrite -C $WORKSPACE/epa
+          /usr/bin/tar xzf $WORKSPACE/epa/liquibase.tar.gz --overwrite -C $WORKSPACE/epa
           /usr/local/bin/aws s3 cp s3://owi-common-resources/resources/InstallFiles/postgres/$JDBC_JAR $WORKSPACE/epa/lib/$JDBC_JAR
         '''
       }
